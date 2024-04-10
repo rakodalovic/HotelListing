@@ -1,3 +1,4 @@
+using HotelListing.Data;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -23,13 +24,12 @@ builder.Services.AddCors(options =>
         policyBuilder.AllowAnyOrigin();
         policyBuilder.AllowAnyHeader();
         policyBuilder.AllowAnyMethod();
-        policyBuilder.AllowCredentials();
     });
 });
 
-/*builder.Services.AddDbContext<DatabaseContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("sqlConnection"))
-);*/
+builder.Services.AddDbContext<DataContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+);
 
 var app = builder.Build();
 
